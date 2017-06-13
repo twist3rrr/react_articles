@@ -21,10 +21,25 @@ class App extends Component {
 
     }
 
+    deleteArticle(id) {
+        let articles = [];
+
+        this.state.articles.forEach((article) => {
+            if (id !== article.id) {
+                articles.push(article);
+            }
+        });
+
+        this.setState({
+            articles
+        });
+    }
+
+
     render() {
 
         return (
-            <Articles articles={this.state.articles} />
+            <Articles articles={this.state.articles} deleteArticle={this.deleteArticle.bind(this)} />
         );
     };
 
