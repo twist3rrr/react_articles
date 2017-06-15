@@ -1,43 +1,42 @@
 import React, {Component} from 'react';
-import Articles from './Articles';
-import FilterForm from './FilterForm';
 import axios from 'axios';
+import ArticlesPage from './ArticlesPage';
 
 class App extends Component {
-
   state = {
     articles: []
   };
 
   componentDidMount() {
-    axios.get('https://jsonplaceholder.typicode.com/comments').then((response) => {
-      this.setState({articles: response.data});
+    axios.get('https://jsonplaceholder.typicode.com/comments')
+    .then((response) => {
+      this.setState({ articles: response.data });
     }).catch((error) => {
       console.log(error);
     });
-
   }
 
-  deleteArticle(id) {
-    let articles = [];
+  deleteArticle = (id) => {
+    const { articles } = this.state;
 
-    this.state.articles.forEach((article) => {
-      if (id !== article.id) {
-        articles.push(article);
-      }
+    const newArticles = articles.filter((article) => {
+      return id !== article.id;
     });
 
-    this.setState({articles});
+    this.setState({ articles: newArticles });
   }
 
   render() {
+    console.log('render App');
+    const { articles } = this.state;
 
-    return (
-      <div>
-        <FilterForm/>
-        <Articles articles={this.state.articles} deleteArticle={this.deleteArticle.bind(this)}/>
-      </div>
-    );
+    console.log(articles);
+
+    const content = articles.length
+    ? <ArticlesPage deleteArticle={this.deleteArticle} articles={articles}/>
+    : null;
+
+    return content;
   };
 
 }
