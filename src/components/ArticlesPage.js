@@ -1,10 +1,12 @@
 import React, {Component} from 'react';
 import Articles from './Articles';
 import FilterForm from './FilterForm';
+import AddArticleForm from './AddArticleForm';
 
 class ArticlesPage extends Component {
   state = {
-    filteredArticles: []
+    filteredArticles: [],
+    filteredValue: ''
   }
 
   componentDidMount() {
@@ -15,8 +17,12 @@ class ArticlesPage extends Component {
   }
 
   componentWillReceiveProps(nextProps){
+    const filteredArticles = nextProps.articles.filter((article) => {
+      return article.email.toLowerCase().indexOf(this.state.filteredValue.toLowerCase()) !== -1;
+    });
+
     this.setState({
-      filteredArticles: nextProps.articles
+      filteredArticles
     });
   }
 
@@ -25,21 +31,27 @@ class ArticlesPage extends Component {
 
     const filteredArticles = articles.filter((article) => {
       return article.email.toLowerCase().indexOf(value.toLowerCase()) !== -1;
-    })
+    });
 
     this.setState({
-      filteredArticles
+      filteredArticles,
+      filteredValue: value
     });
   }
 
   render() {
     console.log('renderArticlePage');
     const { filteredArticles } = this.state;
-    const { deleteArticle } = this.props;
+    const { deleteArticle, addArticle } = this.props;
 
     return (
       <div>
+        <p>FILTER</p>
         <FilterForm filterArticles={this.filterArticles}/>
+        <hr />
+        <p>ADD NEW</p>
+        <AddArticleForm addArticle={addArticle}/>
+        <hr />
         <Articles articles={filteredArticles} deleteArticle={deleteArticle}/>
       </div>
     );

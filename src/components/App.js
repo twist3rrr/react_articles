@@ -26,6 +26,22 @@ class App extends Component {
     this.setState({ articles: newArticles });
   }
 
+  addArticle = (email, id, name) => {
+    const newArticle = {
+      email,
+      id,
+      name
+    };
+
+    let newArticleArray = this.state.articles;
+    newArticleArray.push(newArticle);
+
+    this.setState({
+      articles: newArticleArray
+    });
+
+  }
+
   render() {
     console.log('render App');
     const { articles } = this.state;
@@ -33,7 +49,7 @@ class App extends Component {
     console.log(articles);
 
     const content = articles.length
-    ? <ArticlesPage deleteArticle={this.deleteArticle} articles={articles}/>
+    ? <ArticlesPage deleteArticle={this.deleteArticle} addArticle={this.addArticle} articles={articles}/>
     : null;
 
     return content;
