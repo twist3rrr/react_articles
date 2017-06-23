@@ -1,3 +1,22 @@
 .filter-bar input {
   margin: 0 10px 20px;
 }
+
+
+.example--animation-enter {
+  opacity: 0.01;
+}
+
+.example--animation-enter.example--animation-enter-active {
+  opacity: 1;
+  transition: opacity 500ms ease-in;
+}
+
+.example--animation-leave {
+  opacity: 1;
+}
+
+.example--animation-leave.example--animation-leave-active {
+  opacity: 0.01;
+  transition: opacity 300ms ease-in;
+}

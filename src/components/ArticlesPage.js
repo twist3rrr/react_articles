@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import Articles from './Articles';
 import FilterForm from './FilterForm';
 import AddArticleForm from './AddArticleForm';
+import Counter from './Counter';
 
 class ArticlesPage extends Component {
   state = {
@@ -46,6 +47,8 @@ class ArticlesPage extends Component {
 
     return (
       <div>
+        <Counter/>
+        <hr />
         <p>FILTER</p>
         <FilterForm filterArticles={this.filterArticles}/>
         <hr />
