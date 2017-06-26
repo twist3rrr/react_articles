@@ -8,7 +8,7 @@ class ArticlesPage extends Component {
   state = {
     filteredArticles: [],
     filteredValue: ''
-  }
+  };
 
   componentDidMount() {
     const { articles } = this.props;
@@ -28,7 +28,7 @@ class ArticlesPage extends Component {
   }
 
   filterArticles = (value) => {
-    const { articles } = this.props
+    const { articles } = this.props;
 
     const filteredArticles = articles.filter((article) => {
       return article.email.toLowerCase().indexOf(value.toLowerCase()) !== -1;
@@ -38,7 +38,7 @@ class ArticlesPage extends Component {
       filteredArticles,
       filteredValue: value
     });
-  }
+  };
 
   render() {
     console.log('renderArticlePage');

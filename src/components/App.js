@@ -24,7 +24,7 @@ class App extends Component {
     });
 
     this.setState({ articles: newArticles });
-  }
+  };
 
   addArticle = (email, id, name) => {
     const newArticle = {
@@ -40,7 +40,7 @@ class App extends Component {
       articles: newArticleArray
     });
 
-  }
+  };
 
   render() {
     console.log('render App');
