@@ -55,7 +55,7 @@ class ArticlesPage extends Component {
         <p>ADD NEW</p>
         <AddArticleForm addArticle={addArticle}/>
         <hr />
-        <Articles articles={filteredArticles} deleteArticle={deleteArticle}/>
+        <Articles articles={filteredArticles}/>
       </div>
     );
   };

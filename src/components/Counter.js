@@ -1,27 +1,29 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {increment} from '../AC/counter';
+import {increment, incrementByValue} from '../AC/counter';
 
 class Counter extends Component {
     state = {
-        incrementByValue: 0
+        inputValue: 0
     };
 
     handleInputChange = (e) => {
         this.setState({
-            incrementByValue: e.target.value
+            inputValue: e.target.value
         });
     };
 
     render() {
-        const {plusOne, counter} = this.props;
+        const {plusOne, counter, plusBy} = this.props;
+        const {inputValue} = this.state;
+
         return (
             <div>
                 <h2>{counter}</h2>
                 <button onClick={plusOne}>Increment</button>
                 <hr/>
-                <input type="number" value={this.state.incrementByValue} onChange={this.handleInputChange}/>
-                <button>Increment By Value</button>
+                <input type="number" value={inputValue} onChange={this.handleInputChange}/>
+                <button onClick={() => plusBy(inputValue)}>Increment By Value</button>
             </div>
         )
     }
@@ -31,5 +33,6 @@ export default connect((state) => {
     const {counter} = state;
     return {counter};
 }, {
-    plusOne: increment
+    plusOne: increment,
+    plusBy: incrementByValue
 })(Counter);

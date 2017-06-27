@@ -1,30 +1,23 @@
 import React, {Component} from 'react';
-import axios from 'axios';
 import ArticlesPage from './ArticlesPage';
+import defaultArticles from '../api/articles';
+import { initArticles } from '../AC/articles';
+import { connect } from 'react-redux';
 
 class App extends Component {
-  state = {
-    articles: []
-  };
 
   componentDidMount() {
-    axios.get('https://jsonplaceholder.typicode.com/comments')
-    .then((response) => {
-      this.setState({ articles: response.data });
-    }).catch((error) => {
-      console.log(error);
-    });
+    // axios.get('https://jsonplaceholder.typicode.com/comments')
+    // .then((response) => {
+    //   this.setState({ articles: response.data });
+    // }).catch((error) => {
+    //   console.log(error);
+    // });
+
+    const { initArticles } = this.props;
+    initArticles(defaultArticles);
+
   }
-
-  deleteArticle = (id) => {
-    const { articles } = this.state;
-
-    const newArticles = articles.filter((article) => {
-      return id !== article.id;
-    });
-
-    this.setState({ articles: newArticles });
-  };
 
   addArticle = (email, id, name) => {
     const newArticle = {
@@ -44,8 +37,7 @@ class App extends Component {
 
   render() {
     console.log('render App');
-    const { articles } = this.state;
-
+    const { articles } = this.props;
     console.log(articles);
 
     const content = articles.length
@@ -57,4 +49,11 @@ class App extends Component {
 
 }
 
-export default App;
+export default connect(
+  (state) => {
+    const { articles } = state;
+    return { articles };
+  }, {
+    initArticles
+  }
+)(App);
