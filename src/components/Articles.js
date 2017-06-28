@@ -2,10 +2,10 @@ import React from 'react';
 import Article from './Article';
 
 function Articles(props) {
-  const {articles} = props;
+  const {articles, deleteArticle} = props;
 
   const articlesBlocks = articles.map((article) => {
-    return (<Article key={article.id} article={article} deleteArticle={props.deleteArticle}/>);
+    return (<Article key={article.id} article={article} deleteArticle={deleteArticle}/>);
   });
 
   return (

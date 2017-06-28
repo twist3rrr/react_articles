@@ -1,59 +1,37 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import ArticlesPage from './ArticlesPage';
 import defaultArticles from '../api/articles';
-import { initArticles } from '../AC/articles';
+import { initArticles, deleteArticle, addArticle } from '../AC/articles';
+import { changeFilterValue } from '../AC/filter';
 import { connect } from 'react-redux';
 
 class App extends Component {
 
   componentDidMount() {
-    // axios.get('https://jsonplaceholder.typicode.com/comments')
-    // .then((response) => {
-    //   this.setState({ articles: response.data });
-    // }).catch((error) => {
-    //   console.log(error);
-    // });
-
     const { initArticles } = this.props;
     initArticles(defaultArticles);
-
-  }
-
-  addArticle = (email, id, name) => {
-    const newArticle = {
-      email,
-      id,
-      name
-    };
-
-    let newArticleArray = this.state.articles;
-    newArticleArray.push(newArticle);
-
-    this.setState({
-      articles: newArticleArray
-    });
-
   };
 
   render() {
-    console.log('render App');
-    const { articles } = this.props;
-    console.log(articles);
-
-    const content = articles.length
-    ? <ArticlesPage deleteArticle={this.deleteArticle} addArticle={this.addArticle} articles={articles}/>
-    : null;
-
-    return content;
+    const { resultedArticles, deleteArticle, addArticle, changeFilterValue } = this.props;
+    return <ArticlesPage deleteArticle={deleteArticle} addArticle={addArticle} articles={resultedArticles} changeFilterValue={changeFilterValue}/>;
   };
 
-}
+};
 
 export default connect(
   (state) => {
-    const { articles } = state;
-    return { articles };
+    const { articles, filtering } = state;
+
+    const resultedArticles =  articles.filter((article) => {
+        return article.email.toLowerCase().indexOf(filtering.toLowerCase()) !== -1;
+    });
+
+    return { resultedArticles };
   }, {
-    initArticles
+    initArticles,
+    deleteArticle,
+    addArticle,
+    changeFilterValue
   }
 )(App);

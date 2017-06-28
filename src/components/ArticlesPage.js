@@ -1,65 +1,23 @@
-import React, {Component} from 'react';
+import React from 'react';
 import Articles from './Articles';
 import FilterForm from './FilterForm';
 import AddArticleForm from './AddArticleForm';
 import Counter from './Counter';
 
-class ArticlesPage extends Component {
-  state = {
-    filteredArticles: [],
-    filteredValue: ''
-  };
+export default function ArticlesPage(props) {
+  const { articles, deleteArticle, addArticle, changeFilterValue } = props;
 
-  componentDidMount() {
-    const { articles } = this.props;
-    this.setState({
-      filteredArticles: articles
-    });
-  }
-
-  componentWillReceiveProps(nextProps){
-    const filteredArticles = nextProps.articles.filter((article) => {
-      return article.email.toLowerCase().indexOf(this.state.filteredValue.toLowerCase()) !== -1;
-    });
-
-    this.setState({
-      filteredArticles
-    });
-  }
-
-  filterArticles = (value) => {
-    const { articles } = this.props;
-
-    const filteredArticles = articles.filter((article) => {
-      return article.email.toLowerCase().indexOf(value.toLowerCase()) !== -1;
-    });
-
-    this.setState({
-      filteredArticles,
-      filteredValue: value
-    });
-  };
-
-  render() {
-    console.log('renderArticlePage');
-    const { filteredArticles } = this.state;
-    const { deleteArticle, addArticle } = this.props;
-
-    return (
-      <div>
-        <Counter/>
-        <hr />
-        <p>FILTER</p>
-        <FilterForm filterArticles={this.filterArticles}/>
-        <hr />
-        <p>ADD NEW</p>
-        <AddArticleForm addArticle={addArticle}/>
-        <hr />
-        <Articles articles={filteredArticles}/>
-      </div>
-    );
-  };
-
-}
-
-export default ArticlesPage;
+  return (
+    <div>
+      <Counter/>
+      <hr/>
+      <p>FILTER</p>
+      <FilterForm changeFilterValue={changeFilterValue}/>
+      <hr/>
+      <p>ADD NEW</p>
+      <AddArticleForm addArticle={addArticle}/>
+      <hr/>
+      <Articles articles={articles} deleteArticle={deleteArticle}/>
+    </div>
+  );
+};

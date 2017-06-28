@@ -1,4 +1,4 @@
-import { INIT_ARTICLES, DELETE_ARTICLE } from '../constants';
+import { INIT_ARTICLES, DELETE_ARTICLE, ADD_ARTICLE } from '../constants';
 
 export const initArticles = (articles) => {
   return {
@@ -15,6 +15,16 @@ export const deleteArticle = (id) => {
     payload: {
       id
     }
+  };
+};
 
-  }
+export const addArticle = (email, id, name) => {
+  return {
+    type: ADD_ARTICLE,
+    payload: {
+      email,
+      id,
+      name
+    }
+  };
 };

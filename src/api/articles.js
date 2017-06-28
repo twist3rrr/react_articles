@@ -1,5 +1,5 @@
 /* eslint-disable */
-export default[
+export default [
   {
     "postId" : 1,
     "id" : 1,
