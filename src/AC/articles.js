@@ -1,11 +1,8 @@
 import { INIT_ARTICLES, DELETE_ARTICLE, ADD_ARTICLE } from '../constants';
 
-export const initArticles = (articles) => {
+export const initArticles = () => {
   return {
-    type: INIT_ARTICLES,
-    payload: {
-      articles
-    }
+    type: INIT_ARTICLES
   };
 };
 

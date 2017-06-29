@@ -1,10 +1,10 @@
-import  { INIT_ARTICLES, DELETE_ARTICLE, ADD_ARTICLE } from '../constants';
+import  { INIT_ARTICLES_SUCCESS, DELETE_ARTICLE, ADD_ARTICLE } from '../constants';
 
 export default(state = [], action) => {
   const { type, payload } = action;
 
   switch(type) {
-    case INIT_ARTICLES:
+    case INIT_ARTICLES_SUCCESS:
       const { articles } = payload;
       return Array.prototype.concat(state, articles);
     case DELETE_ARTICLE:

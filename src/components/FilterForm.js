@@ -1,18 +1,13 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-class FilterForm extends Component {
-  handleEmailChange = (e) => {
-    const { changeFilterValue } = this.props;
-    changeFilterValue(e.target.value);
-  }
-
-  render() {
-    return (
-      <div className="filter-bar">
-        <input type="text" placeholder="email" onChange={this.handleEmailChange}/>
-      </div>
-    );
+export default function FilterForm(props) {
+  const handleEmailChange = (e) => {
+    props.changeFilterValue(e.target.value);
   };
-}
 
-export default FilterForm;
+  return (
+    <div className="filter-bar">
+      <input type="text" placeholder="email" onChange={handleEmailChange}/>
+    </div>
+  );
+};
